@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Page - GadgetShop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: darkblue;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .cart-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: rgb(74, 198, 74);
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+
+        .alamat {
+            padding-left: 25px;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            background-color: #ddd;
+        }
+
+        #address-form {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            color: goldenrod;
+        }
+
+        #product-details {
+            max-width: 100%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: darkblue;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #333;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Checkout Page</h1>
+    </header>
+
+    <div class="alamat">
+        <p>
+            <strong>Shipping Address</strong> <br>
+            Fajri Ramadhan | (+62) 857-0612-5411<br>
+            Jln. Kebon Jeruk Raya RT.099/RW.99<br>
+            No.99 Jakarta Barat
+        </p>
+    </div>
+
+    <div id="product-details">
+            
+    </div>
+
+    <button type="button" onclick="confirmPurchase()">Checkout</button>
+
+    <script>
+        // Mengambil parameter ID produk dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Menampilkan rincian produk berdasarkan ID
+        const productDetailsContainer = document.getElementById('product-details');
+        productDetailsContainer.innerHTML = getProductDetailsById(productId);
+
+        function getProductDetailsById(productId) {
+            // Implementasikan logika untuk mendapatkan rincian produk dari ID
+            // Anda dapat menggunakan database atau array produk sesuai kebutuhan
+            // Contoh sederhana:
+            const productData = {
+                'buy1': { name: 'Samsung S23 Ultra', price: 'Rp 23.990.000'},
+                'buy2': { name: 'Iphone 14 Pro Max', price: 'Rp 22.990.000'},
+                'buy3': { name: 'Xiaomi Mi13S Ultra', price: 'Rp 22.490.000'},
+                'buy4': { name: 'Samsung Z Fold 5', price: 'Rp 27.490.000'},
+                'buy2-1': { name: 'Asus ROG Strix Scar', price: 'Rp 64.990.000'},
+                'buy2-2': { name: 'MSI Raider GE 76', price: 'Rp 62.990.000'},
+                'buy2-3': { name: 'Dell Alienware X 17', price: 'Rp 72.490.000'},
+                'buy2-4': { name: 'Macbook Pro M2 Max', price: 'Rp 59.990.000'},
+                'buy3-1': { name: 'Huawei Matepad 13.2', price: 'Rp 19.990.000'},
+                'buy3-2': { name: 'Ipad Pro M2', price: 'Rp 29.990.000'},
+                'buy3-3': { name: 'Samsung Tab S9 Ultra', price: 'Rp 22.490.000'},
+                'buy4-1': { name: 'PC I9 13900K | RTX 4090', price: 'Rp 84.990.000'},
+                'buy4-2': { name: 'PC Ryzen 9 7900X | RTX 4080', price: 'Rp 64.990.000'},
+                'buy4-3': { name: 'PC Ryzen 7 7800X | RX 7700XT', price: 'Rp 37.490.000'},
+                'buy4-4': { name: 'PC I7 13700F | RTX 3070 TI', price: 'Rp 39.990.000'},
+                'buy5-1': { name: 'ROG Monitor 360hz', price: 'Rp 14.990.000'},
+                'buy5-2': { name: 'UF Monitor 144hz', price: 'Rp 4.990.000'},
+                'buy5-3': { name: 'ROG Monitor 4K | 42inc', price: 'Rp 27.490.000'},
+                'buy5-4': { name: 'MSI Monitor 240hz', price: 'Rp 9.990.000'},
+                'buy6-1': { name: 'Logitech Gaming Mouse', price: 'Rp 1.990.000'},
+                'buy6-2': { name: 'Razer Gaming Mouse', price: 'Rp 2.990.000'},
+                'buy6-3': { name: 'SteelSeries RGB Keyboard', price: 'Rp 3.490.000'},
+                'buy6-4': { name: 'Corsair Mechanical Keyboard', price: 'Rp 4.990.000'},
+                'buy6-5': { name: 'Rexus Gaming Headphone', price: 'Rp 490.000'},
+                'buy6-6': { name: 'Logitech Gaming Headphone', price: 'Rp 2.490.000'},
+                'buy6-7': { name: 'SecretLab Gaming Chair', price: 'Rp 12.990.000'},
+                'buy6-8': { name: 'Corsair Gaming Chair', price: '>Rp 5.990.000'},
+
+                // ... tambahkan rincian produk lainnya ...
+            };
+
+            const product = productData[productId];
+
+            if (product) {
+                return `
+                    <h2>${product.name}</h2>
+                    <p>Price: ${product.price}</p>
+                    <!-- Tambahan informasi produk lainnya sesuai kebutuhan -->
+                `;
+            } else {
+                return '<p>Product not found</p>';
+            }
+        }
+
+        function confirmPurchase() {
+            // Implementasikan logika konfirmasi pembelian di sini
+            alert('Purchase confirmed! Thank you for shopping with us.');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(217, 230, 240);
+        }
+
+        header {
+            background: linear-gradient(to right, darkblue, rgb(65, 65, 217));
+            color: goldenrod;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .alamat {
+            padding-left: 25px;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            background-color: #ddd;
+        }
+
+        .cart-container {
+            max-width: 100%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #f2f2f2;
+            color: rgb(74, 198, 74);
+            ;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Shopping Cart</h1>
+    </header>
+
+    <div class="alamat">
+        <p>
+            <strong>Shipping Address</strong> <br>
+            Fajri Ramadhan | (+62) 857-0612-5411<br>
+            Jln. Kebon Jeruk Raya RT.099/RW.99<br>
+            No.99 Jakarta Barat
+        </p>
+    </div>
+
+    <div class="cart-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th> <!-- New column for delete button -->
+                </tr>
+            </thead>
+            <tbody id="cartTableBody">
+                <!-- Product rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <div class="total">
+            <p>Total: Rp 0</p>
+        </div>
+
+        <button onclick="checkout()" style="padding: 10px 20px; background-color:green; color: white;">
+            Checkout
+        </button>
+    </div>
+
+    <script>
+        // Retrieve cart items from localStorage
+        var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Function to render products in the cart
+        function renderCartProducts() {
+            var tbody = document.getElementById("cartTableBody");
+            tbody.innerHTML = "";
+
+            // Loop through each item in the cartItems array
+            cartItems.forEach((item, index) => {
+                var formattedPrice = formatCurrency(item.price);
+                var formattedTotal = formatCurrency(item.price * item.quantity);
+
+                var row = `<tr>
+                                <td>${item.name}</td>
+                                <td>Rp ${formattedPrice}</td>
+                                <td>
+                                    <button onclick="updateQuantity(${index}, 'decrement')">-</button>
+                                    ${item.quantity}
+                                    <button onclick="updateQuantity(${index}, 'increment')">+</button>
+                                </td>
+                                <td>Rp ${formattedTotal}</td>
+                                <td><button style="background-color: red; color: white;" onclick="deleteItem(${index})">Delete</button></td>
+                            </tr>`;
+
+                tbody.innerHTML += row;
+            });
+
+            // Calculate and display the total
+            calculateTotal();
+        }
+
+        // Function to calculate and display the total
+        function calculateTotal() {
+            var total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            var formattedTotal = formatCurrency(total);
+            document.querySelector(".total p").innerText = "Total: Rp " + formattedTotal;
+        }
+
+        // Function to update quantity
+        function updateQuantity(index, action) {
+            if (action === 'increment') {
+                cartItems[index].quantity++;
+            } else if (action === 'decrement' && cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+            }
+
+            // Update localStorage and re-render the cart
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            renderCartProducts();
+        }
+
+        // Function to delete item
+        function deleteItem(index) {
+            cartItems.splice(index, 1); // Remove item at the specified index
+            // Update localStorage and re-render the cart
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            renderCartProducts();
+        }
+
+        // Function to format currency with dot separator
+        function formatCurrency(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Function to handle checkout
+        function checkout() {
+            // Perform any necessary actions (e.g., send data to the server)
+            
+            // Redirect to the success page
+            window.location.href = 'success.html';
+        }
+
+        // Call the function to render products on page load
+        renderCartProducts();
+    </script>
+
+</body>
+
+</html>

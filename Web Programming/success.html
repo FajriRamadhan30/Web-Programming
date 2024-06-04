@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #28a745; /* Green color */
+        }
+
+        p {
+            color: #6c757d; /* Gray color */
+        }
+
+        .check-icon {
+            color: #28a745; /* Green color */
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        /* Invoice styles */
+        .invoice-container {
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .total {
+            font-weight: bold;
+            color: #28a745; /* Green color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="check-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h1>Payment Successful!</h1>
+    <p>Thank you for your purchase.</p>
+
+    <!-- Invoice Section -->
+    <div class="invoice-container">
+        <h2>Invoice</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceTableBody">
+                <!-- Invoice rows will be dynamically added here -->
+            </tbody>
+        </table><br>
+
+        <!-- Total row -->
+        <div class="total">Total: Rp <span id="totalAmount"></span></div>
+    </div>
+
+    <script>
+        // Retrieve cart items from localStorage
+        var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        
+        // Function to render products in the invoice
+        function renderInvoiceProducts() {
+            var tbody = document.getElementById("invoiceTableBody");
+            tbody.innerHTML = "";
+
+            // Loop through each item in the cartItems array
+            cartItems.forEach(item => {
+                var row = `<tr>
+                                <td>${item.name}</td>
+                                <td>Rp ${formatNumber(item.price)}</td>
+                                <td>${item.quantity}</td>
+                                <td>Rp ${formatNumber(item.price * item.quantity)}</td>
+                            </tr>`;
+
+                tbody.innerHTML += row;
+            });
+
+            // Calculate and display the total
+            calculateTotal();
+        }
+
+        // Function to calculate and display the total
+        function calculateTotal() {
+            var total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            document.getElementById("totalAmount").innerText = formatNumber(total);
+        }
+
+        // Format number with commas for thousands
+        function formatNumber(number) {
+            return new Intl.NumberFormat('id-ID').format(number);
+        }
+
+        // Call the function to render products in the invoice on page load
+        renderInvoiceProducts();
+    </script>
+</body>
+
+</html>

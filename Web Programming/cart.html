@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: linear-gradient(to right, darkblue, rgb(65, 65, 217));
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .cart-container {
+            max-width: 100%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #f2f2f2;
+            color: rgb(74, 198, 74);
+            ;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+
+        .alamat {
+            padding-left: 25px;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Shopping Cart</h1>
+    </header>
+
+    <div class="alamat">
+        <p>
+            <strong>Shipping Address</strong> <br>
+            Fajri Ramadhan | (+62) 857-0612-5411<br>
+            Jln. Kebon Jeruk Raya RT.099/RW.99<br>
+            No.99 Jakarta Barat
+        </p>
+    </div>
+
+    <div class="cart-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example product row -->
+                <!-- Struktur tabel yang dimodifikasi -->
+                <tr>
+                    <td id="nama1"></td>
+                    <td id="harga1">Rp 0</td>
+                    <td>
+                        <button onclick="kurangiJumlah('jml1')">-</button>
+                        <span id="jml1">0</span>
+                        <button onclick="tambahJumlah('jml1')">+</button>
+                    </td>
+                    <td id="total1">Rp 0</td>
+                </tr>
+
+                <tr>
+                    <td>SSD M.2 NVME, 512GB</td>
+                    <td id="harga2">Rp 499.000</td>
+                    <td>
+                        <button onclick="kurangiJumlah('jml2')">-</button>
+                        <span id="jml2">2</span>
+                        <button onclick="tambahJumlah('jml2')">+</button>
+                    </td>
+                    <td id="total2"></td>
+                </tr>
+                <tr>
+                    <td>SSD SATA 2.5 Inc, 1TB</td>
+                    <td id="harga3">Rp 649.000</td>
+                    <td>
+                        <button onclick="kurangiJumlah('jml3')">-</button>
+                        <span id="jml3">2</span>
+                        <button onclick="tambahJumlah('jml3')">+</button>
+                    </td>
+                    <td id="total3"></td>
+                </tr>
+                <!-- Add more product rows as needed -->
+            </tbody>
+        </table>
+
+        <div class="total">
+            <p>Total: xxxxxxx</p>
+        </div>
+
+        <button style="padding: 10px 20px; background-color:green; color: white;">
+            Checkout
+        </button>
+    </div>
+
+    <script>
+
+        // function kurangiJumlah(jumlahId) {
+        //     var jumlahElement = document.getElementById(jumlahId);
+        //     var jumlah = parseInt(jumlahElement.innerText);
+
+        //     if (jumlah > 1) {
+        //         jumlah--;
+        //         jumlahElement.innerText = jumlah;
+        //         hitungTotalKeseluruhan();
+        //     }
+        // }
+
+        // // Fungsi untuk menambah jumlah produk
+        // function tambahJumlah(jumlahId) {
+        //     var jumlahElement = document.getElementById(jumlahId);
+        //     var jumlah = parseInt(jumlahElement.innerText);
+
+        //     jumlah++;
+        //     jumlahElement.innerText = jumlah;
+        //     hitungTotalKeseluruhan();
+        // }
+
+        // Fungsi untuk format angka ke dalam format Rupiah
+        function formatRupiah(angka) {
+            var reverse = angka.toString().split('').reverse().join(''),
+                ribuan = reverse.match(/\d{1,3}/g);
+            ribuan = ribuan.join('.').split('').reverse().join('');
+            return ribuan;
+        }
+
+        // Menghitung total untuk setiap produk
+        function hitungTotal(hargaId, jumlahId, totalId) {
+            var harga = parseInt(document.getElementById(hargaId).innerText.replace("Rp ", "").replace(".", ""));
+            var jumlah = parseInt(document.getElementById(jumlahId).innerText);
+            var total = harga * jumlah;
+            document.getElementById(totalId).innerText = "Rp " + formatRupiah(total);
+            return total;
+        }
+
+        // Menghitung total keseluruhan
+        function hitungTotalKeseluruhan() {
+            var total1 = hitungTotal("harga1", "jml1", "total1");
+            var total2 = hitungTotal("harga2", "jml2", "total2");
+            var total3 = hitungTotal("harga3", "jml3", "total3");
+
+            var totalHargaKeseluruhan = total1 + total2 + total3;
+
+            // Menampilkan total harga ke dalam elemen dengan class "total"
+            document.querySelector(".total p").innerText = "Total: Rp " + formatRupiah(totalHargaKeseluruhan);
+        }
+
+        // Panggil fungsi untuk menghitung total keseluruhan saat halaman dimuat
+        hitungTotalKeseluruhan();
+
+        function redirectToOrderPage() {
+            // Get total amount from the cart page
+            var totalAmount = document.querySelector(".total p").innerText.replace("Total: Rp ", "").replace(".", "");
+
+            // Get product details from the cart page
+            var products = [
+                {
+                    name: "RAM DDR-4, 16GB",
+                    price: "Rp 749.000",
+                    quantity: document.getElementById("jml1").innerText
+                },
+                {
+                    name: "SSD M.2 NVME, 512GB",
+                    price: "Rp 499.000",
+                    quantity: document.getElementById("jml2").innerText
+                },
+                {
+                    name: "SSD SATA 2.5 Inc, 1TB",
+                    price: "Rp 649.000",
+                    quantity: document.getElementById("jml3").innerText
+                }
+                // Add more product details as needed
+            ];
+
+            // Construct URL with parameters
+            var orderPageURL = "keranjang.html" + "?totalAmount=" + totalAmount + "&products=" + encodeURIComponent(JSON.stringify(products));
+
+            // Redirect to the order page
+            window.location.href = pemesanan.html;
+        }
+
+        var cartItems = [];
+
+        function addToCart(cartId) {
+    // Ambil data dari tombol "Add to Cart"
+    var cartButton = document.querySelector(`[data-id="${cartId}"]`);
+    var productId = cartButton.dataset.id;
+    var productName = cartButton.dataset.name;
+    var productPrice = parseInt(cartButton.dataset.price);
+
+    // Cek apakah produk sudah ada di keranjang
+    var existingItem = cartItems.find(item => item.productId === productId);
+
+    if (existingItem) {
+        // Jika sudah ada, tambahkan jumlahnya
+        existingItem.quantity += 1;
+    } else {
+        // Jika belum ada, tambahkan produk baru ke dalam keranjang
+        cartItems.push({
+            productId: productId,
+            name: productName,
+            price: productPrice,
+            quantity: 1
+        });
+    }
+
+    // Tampilkan produk di tabel
+    tampilkanProdukDiTabel();
+
+    // Hitung total harga dan update tampilan
+    hitungTotalKeseluruhan();
+}
+
+function tampilkanProdukDiTabel() {
+    // Ambil elemen tbody dari tabel
+    var tbody = document.querySelector("tbody");
+
+    // Hapus semua baris dalam tbody
+    tbody.innerHTML = "";
+
+    // Loop melalui setiap item di keranjang dan tambahkan ke tabel
+    cartItems.forEach(item => {
+        var row = `<tr>
+                        <td>${item.name}</td>
+                        <td>Rp ${formatRupiah(item.price)}</td>
+                        <td>
+                            <button onclick="kurangiJumlah('${item.productId}')">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="tambahJumlah('${item.productId}')">+</button>
+                        </td>
+                        <td>Rp ${formatRupiah(item.price * item.quantity)}</td>
+                    </tr>`;
+
+        // Tambahkan baris ke dalam tabel
+        tbody.innerHTML += row;
+    });
+}
+
+function kurangiJumlah(productId) {
+    var existingItem = cartItems.find(item => item.productId === productId);
+
+    if (existingItem && existingItem.quantity > 1) {
+        existingItem.quantity -= 1;
+    }
+
+    tampilkanProdukDiTabel();
+    hitungTotalKeseluruhan();
+}
+
+function tambahJumlah(productId) {
+    var existingItem = cartItems.find(item => item.productId === productId);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    }
+
+    tampilkanProdukDiTabel();
+    hitungTotalKeseluruhan();
+}
+
+
+
+    </script>
+
+
+</body>
+
+</html>

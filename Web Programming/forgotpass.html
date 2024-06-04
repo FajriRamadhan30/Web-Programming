@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+      }
+      
+      .login-container {
+        width: 300px;
+        margin: 100px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color:rgb(43, 105, 160);
+      }
+      
+      .form-group {
+        margin-bottom: 20px;
+        margin-right: 25px;
+      }
+      
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        outline: none;
+      }
+      
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: rgb(43, 105, 160);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: rgb(6, 69, 158);
+      }
+
+      input:hover {
+        border-color: rgb(43, 105, 160);
+      }
+
+      input:focus {
+        border: 2px solid rgb(6, 69, 158);
+      }
+
+      .imgs{
+        margin-left: 75px;
+        margin-right: 70px;
+      }
+
+      body {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtgscU_HUIGuQjWXhTeYvt_9qGTeBG6pS8P87NAqKH29-nBBwqo_afIdh30FL47NXsoEw&usqp=CAU");
+      }
+
+    </style>
+    
+  <title>Login Page</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="background-color:rgb(163, 202, 218) ;">
+  <div class="login-container">
+    <h3>FORGOT PASSWORD</h3>
+    <div class="imgs">
+    <img src="./picture/s tech logo.png" width="100" height="100" style="margin-left: 20px;">
+</div>
+    <form action="login.html">
+      <div class="form-group">
+        <label for="password">Password Baru:</label>
+        <input type="password" id="password" name="password" placeholder="Buat password baru (8-12 Character)" minlength="8" maxlength="12" required>
+      </div>
+      <div class="form-group">
+        <label for="passwords">Ulangi Password Baru:</label>
+        <input type="password" id="passwords" name="passwords" placeholder="Masukkan ulang password baru" minlength="8" maxlength="12" required>
+      </div>
+
+  <label style="
+  font-weight: 200 ; 
+  font-size:12px ; 
+  margin-bottom:20px; 
+  margin-top: -15px; 
+  font-style:italic;
+  color:dimgrey;
+  ">
+  <input type="checkbox" onclick="myFunction()">
+  Tampilkan
+    </label>
+      <button type="submit">Konfirmasi</button>
+</form>
+</div>
+
+<script>
+  
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+  var x = document.getElementById("passwords");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar E-Commerce Gadget</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(217, 230, 240);;
+        }
+
+        nav {
+            background: linear-gradient(to right, darkblue, rgb(65, 65, 217));
+            padding: 30px 20px;
+            color: goldenrod;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: blue;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon,
+        .profile-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: transparent;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: blue;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: darkblue;
+        }
+
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin-top: 0px;
+            text-align: center;
+            background-color: rgb(115, 170, 214) /* Menetapkan posisi tengah */
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        img {
+            width: 80%;
+            height: 350px;
+            margin: 0 auto; /* Menetapkan margin auto untuk posisi tengah */
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .prev {
+            left: 5px; /* Menetapkan posisi di sebelah kiri */
+        }
+
+        .next {
+            right: 5px; /* Menetapkan posisi di sebelah kanan */
+        }
+
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .product-card {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+           
+        }
+
+        .product {
+            width: 300px;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .product-description {
+            margin: 10px 0;
+        }
+
+        .buy-button{
+            background-color: darkblue;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-button{
+            background-color: darkgreen;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            background-color: transparent;
+            padding: 7px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .card {
+            border: 3px solid deepskyblue;
+            box-shadow: 0 8px 16px rgba(78, 70, 70, 0.1);
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">SuperTech</div>
+        <div class="menu">
+            <a href="homepage.html">Home</a>
+            <div class="dropdown">
+                <a href="#">Products</a>
+                <div class="dropdown-content">
+                    <a href="smartphone.html">Smartphones</a>
+                    <a href="laptop.html">Laptops</a>
+                    <a href="tablet.html">Tablet</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Categories</a>
+                <div class="dropdown-content">
+                    <a href="smartphone.html">Gadget</a>
+                    <a href="pc.html">Computer</a>
+                </div>
+            </div>
+            <a href="#">Contact</a>
+            <a href="cart-page.html"><div class="cart-icon">&#128722;</div></a>
+
+            <a href="loginregister.html"><div class="profile-icon">&#128100;</div></a>
+
+        </div>
+    </nav>
+
+    <div class="product-card">
+
+        <div class="card" style="width: 18rem;">
+            <img src="./picture/3__performance_laptop.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <strong>Asus ROG Strix Scar</strong>
+              <p class="card-text">Gadget with advanced technology that have a high performance for your activities.</p>
+              <p style="
+              font-weight: bold;
+              color: #555;
+              ">Rp 64.990.000</p>
+              <button class="buy-button" onclick="redirectToBuyPage('buy2-1')">Buy Now</button>
+              <button class="cart-button"
+              productId="cart1_3"
+              productName="Asus ROG Strix Scar"
+              productPrice="64990000"
+              onclick="addToCart('cart1_3', 'Asus ROG Strix Scar', '64990000')">Add to Cart</button>          
+            </div>
+          </div>
+
+
+
+          <div class="card" style="width: 18rem;">
+            <img src="./picture/download (3).jfif" class="card-img-top" alt="...">
+            <div class="card-body">
+                <strong>MSI Raider GE 76</strong>
+                <p class="card-text">Gadget with advanced technology that have a high performance for your activities.</p>
+              <p style="
+              font-weight: bold;
+              color: #555;
+              ">Rp 62.990.000</p>
+              <button class="buy-button" onclick="redirectToBuyPage('buy2-2')">Buy Now</button>
+              <button class="cart-button"
+              productId="cart2_3"
+              productName="MSI Raider GE 76"
+              productPrice="62990000"
+              onclick="addToCart('cart2_3', 'MSI Raider GE 76', '62990000')">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img src="./picture/alienware.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <strong>Dell Alienware X 17</strong>
+                <p class="card-text">Gadget with advanced technology that have a high performance for your activities.</p>
+              <p style="
+              font-weight: bold;
+              color: #555;
+              ">Rp 72.490.000</p>
+              <button class="buy-button" onclick="redirectToBuyPage('buy2-3')">Buy Now</button>
+              <button class="cart-button"
+              productId="cart3_3"
+              productName="Dell Alienware X 17"
+              productPrice="72490000"
+              onclick="addToCart('cart3_3', 'Dell Alienware X 17', '72490000')">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img src="./picture/mac.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <strong>Macbook Pro M2 Max</strong>
+                <p class="card-text">Gadget with advanced technology that have a high performance for your activities.</p>
+              <p style="
+              font-weight: bold;
+              color: #555;
+              ">Rp 59.990.000</p>
+              <button class="buy-button" onclick="redirectToBuyPage('buy2-4')">Buy Now</button>
+              <button class="cart-button"
+              productId="cart4_3"
+              productName="Macbook Pro M2 Max"
+              productPrice="59990000"
+              onclick="addToCart('cart4_3', 'Macbook Pro M2 Max', '59990000')">Add to Cart</button>
+            </div>
+          </div>
+
+
+    </div>
+
+
+<script>
+    function redirectToBuyPage(productId) {
+        // Redirect to the buy page with the product ID as a parameter
+        window.location.href = 'buy-page.html?id=' + productId;
+    }
+
+    </script>
+    
+    <script>
+        var cartItems = [];
+        // Fungsi untuk menambah produk ke dalam keranjang
+        function addToCart(productId, productName, productPrice) {
+            // Ambil data dari produk yang akan ditambahkan ke keranjang
+            var cartItem = {
+                id: productId,
+                name: productName,
+                price: parseInt(productPrice),
+                quantity: 1
+            };
+    
+            // Cek apakah produk sudah ada di dalam keranjang
+            var existingItemIndex = -1;
+            for (var i = 0; i < cartItems.length; i++) {
+                if (cartItems[i].id === productId) {
+                    existingItemIndex = i;
+                    break;
+                }
+            }
+    
+            // Jika produk sudah ada di dalam keranjang, tambahkan jumlahnya
+            if (existingItemIndex !== -1) {
+                cartItems[existingItemIndex].quantity++;
+            } else {
+                // Jika belum ada, tambahkan produk ke dalam keranjang
+                cartItems.push(cartItem);
+            }
+    
+            // Simpan data keranjang ke localStorage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    
+            var storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            // Tampilkan pesan atau lakukan aksi lain jika diperlukan
+            alert('Product added to cart!');
+    
+            // Optional: Update tampilan keranjang pada halaman produk atau lainnya
+            updateCartView();
+        }
+    
+        // Fungsi untuk memperbarui tampilan keranjang (jika diperlukan)
+        function updateCartView() {
+            // Implementasikan perbaruan tampilan keranjang di sini
+        }
+    </script>
+
+</body>
+</html>
